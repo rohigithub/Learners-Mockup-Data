@@ -15,13 +15,10 @@ ORDER BY 2 DESC
 LIMIT 25;
 
 /* How many .edu learners are located in New York */
-SELECT email_domain,cty COUNT(city)
+SELECT city, COUNT(user_id)
 FROM users
-WHERE email_domain LIKE '%.edu'
-AND city LIKE 'New York'
-GROUP BY 2
-ORDER BY 3 DESC
-LIMIT 25;
+WHERE city LIKE 'New York'
+GROUP BY 1;
 
 /* How many of Codecademy learners are using the mobile app */
 SELECT mobile_app, COUNT(mobile_app)
@@ -34,6 +31,12 @@ SELECT sign_up_at,
 FROM users 
 GROUP BY 1
 LIMIT 20;
+/*FOR getting time from datetime format in mysql*/
+SELECT sign_up_at,
+   TIME(sign_up_at)
+FROM users 
+GROUP BY 1
+LIMIT 20;
 
 /* What courses are the Chicago students taking */
 SELECT *
@@ -41,5 +44,4 @@ FROM users
 INNER JOIN progress 
       ON users.user_id = progress.user_id
 WHERE city LIKE 'Chicago'
-GROUP BY email_domain
 LIMIT 100;
